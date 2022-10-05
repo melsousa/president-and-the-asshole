@@ -18,4 +18,5 @@ class Room(AcessConfig):
     
     @staticmethod
     def RoomOf(ownerId:PlayerId, acessConfig:AcessConfig):
+        pass
         #....
