@@ -11,9 +11,9 @@ class CardId(BaseId):
     # def get_cardId(self):
     #     pass
     @staticmethod
-    def CardId():  # retornar um novo id
+    def ofCardId():  # retornar um novo id
         return CardId(uuid.uuid4())
 
     @staticmethod
-    def CardId(value: uuid):  # retornar um id já existente
-        return CardId(uuid)
+    def of(value: uuid):  # retornar um id já existente
+        return CardId(value)

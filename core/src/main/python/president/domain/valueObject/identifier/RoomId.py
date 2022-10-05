@@ -6,8 +6,8 @@ class RoomId(BaseId):
         super().__init__(value)
         
     @staticmethod
-    def RoomId():
+    def ofRoomId():
         return RoomId(uuid.uuid4()) # retornar um novo id
     
-    def RoomId(value:uuid): # retornar um id já existente
+    def of(value:uuid): # retornar um id já existente
         return RoomId(value)
