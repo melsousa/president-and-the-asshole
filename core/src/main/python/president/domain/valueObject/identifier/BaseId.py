@@ -1,5 +1,6 @@
 from abc import ABC
 from asyncio.windows_events import NULL
+from pydoc import classname
 import uuid
 
 from valueObject.ValueObject import ValueObject
@@ -12,18 +13,13 @@ class BaseId(ValueObject, ABC):
     def __init__(self, value):
         self.value = value
 
-    def value(self):
-        return self.value
+    def getValue(self):
+        return self.value.__str__()
 
-    def __eq__(self, Object):
-        if self.value == Object.value:
+    def __eq__(self, o):
+        if self.value == o:
             return True
-        if Object.value == NULL:  # faltando implementação
+        if o == NULL or self.__class__.__name__ != o.__class__.__name__:  # faltando implementação
             return False
-
-        # BaseId
-        # return value.__eq__(Object.value)
-
-    def hashCode(self):
-        pass
-        # Objects.hashCode(self)
+        baseId = BaseId(o)
+        return self.value.__eq__(baseId.value)
