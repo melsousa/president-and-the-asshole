@@ -13,13 +13,13 @@ class AcessConfig(ValueObject):
             raise RuntimeError("'min players' can't be less than 4");
         
         if minPlayers > 13:
-            raise RuntimeError("'min players' can't be less than 4");
+            raise RuntimeError("'min players' can't be greater than " + 13);
         
         if maxPlayers > 13:
-            raise RuntimeError("'min players' can't be less than 4");
+            raise RuntimeError("'max players' can't be greater than 13");
         
         if maxPlayers < minPlayers:
-            raise RuntimeError("'min players' can't be less than 4");
+            raise RuntimeError("'max players' can't be less than " + minPlayers);
         
         return AcessConfig(minPlayers, maxPlayers, 15)
     
