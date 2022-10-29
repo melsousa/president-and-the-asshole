@@ -2,35 +2,46 @@ from typing import List
 from enum import Enum
 
 from numpy import place
+from core.src.main.python.president.domain.entity.Player import Player
 
 from valueObject.AcessConfig import AcessConfig
+from valueObject.CardValue import CardValue
+from valueObject.RoomLink import RoomLink
+from valueObject.Suit import Suit
 from valueObject.identifier.PlayerId import PlayerId
 from valueObject.identifier.RoomId import RoomId
 from valueObject.RoomLink import RoomLink
 
+from Card import Card
+from Player import Player
+from Status import Status
+
 
 class Room(Enum):
 
-    IN_LOBY = "IN_LOBY"
-    SORTING = "SORTING"
-    READY = "READY"
-    ROUND = "ROUND"
-    ROUND_FINISHED = "ROUND_FINISHED"
-    FINISHED = "FINISHED"
-
     roomId: RoomId
-    ownerId: PlayerId
+    owner: Player
     roomLink: RoomLink
     acessConfig: AcessConfig
-    players: List[PlayerId] = []
+    players: List[Player] = []
+    playersToChoice: List[PlayerId] = []
+    cardsToChoice: List[Card] = []
+    status: Status
 
-    def __init__(self, roomId: RoomId, ownerId: PlayerId, roomLink: RoomLink, acessConfig: AcessConfig, players: List[PlayerId]):
+    def __init__(self, roomId: RoomId, owner: Player, roomLink: RoomLink, acessConfig: AcessConfig, players: List[Player]):
         self.roomId = roomId
-        self.ownerId = ownerId
+        self.owner = owner
         self.roomLink = roomLink
         self.acessConfig = acessConfig
         self.players = players
+        self.cardsToChoice = [] # +
+        self.status = Status.WAITING
 
+    def toSorting(self):
+        if self.status != Status.WAITING:
+            print("Room is not waiting") # +
+            
+            
     @staticmethod
     def ofRoom(ownerId: PlayerId, acessConfig: AcessConfig):
         roomId = RoomId.ofRoomId()
@@ -59,5 +70,5 @@ class Room(Enum):
     def acessConfig(self):
         return self.acessConfig
 
-    def players(self):
+    def players(self):  # ?
         return self.players
