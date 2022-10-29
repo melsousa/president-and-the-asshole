@@ -1,33 +1,42 @@
 from ValueObject import ValueObject
+from Visibility import Visibility
 
 
-class AcessConfig(ValueObject):
-    def __init__(self, minPlayers, maxPlayers, timeOfNextPlayer):
-        self.minPlayers = minPlayers
+class AcessConfig(ValueObject, Visibility):
+
+    MIN_PLAYERS = 4
+
+    def __init__(self, maxPlayers, timeOfNextPlayer, visibility: Visibility):
+
         self.maxPlayers = maxPlayers
         self.timeOfNextPlayer = timeOfNextPlayer
+        self.visibility = visibility
 
     @staticmethod
-    def AcessConfig(minPlayers, maxPlayers):
-        if minPlayers < 4:
-            raise RuntimeError("'min players' can't be less than 4");
-        
-        if minPlayers > 13:
-            raise RuntimeError("'min players' can't be greater than " + 13);
-        
+    def ofPublicAcessConfig(maxplayers):
+        return AcessConfig(maxplayers, Visibility.PUBLIC)  # ?
+
+    @staticmethod
+    def ofPrivateAcessConfig(maxplayers):
+        return AcessConfig(maxplayers, Visibility.PRIVATE)
+
+    def ofAcessConfig(maxPlayers, visibility: Visibility):
+        if maxPlayers < AcessConfig.MIN_PLAYERS:
+            raise RuntimeError("'max players' can't be less than four")
+
         if maxPlayers > 13:
-            raise RuntimeError("'max players' can't be greater than 13");
-        
-        if maxPlayers < minPlayers:
-            raise RuntimeError("'max players' can't be less than " + minPlayers);
-        
-        return AcessConfig(minPlayers, maxPlayers, 15)
-    
+            raise RuntimeError("'max players' can't be greater than 13")
+
+        return AcessConfig(maxPlayers, 15, visibility)
+
     def minPlayers(self):
-        return self.minPlayers
-    
+        return self.MIN_PLAYERS
+
     def maxPlayers(self):
         return self.maxPlayers
-    
+
     def timeOfNextPlayer(self):
         return self.timeOfNextPlayer
+
+    def visibility(self):
+        return self.visibility
