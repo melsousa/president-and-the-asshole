@@ -1,33 +1,55 @@
 from ValueObject import ValueObject
+from Visibility import Visibility
+from enum import Enum
 
 
-class AcessConfig(ValueObject):
-    def __init__(self, minPlayers, maxPlayers, timeOfNextPlayer):
-        self.minPlayers = minPlayers
+class AcessConfig(ValueObject, Visibility):
+
+    MIN_PLAYERS = 4
+
+    def __init__(self, maxPlayers, timeOfNextPlayer, visibility: Visibility):
+
         self.maxPlayers = maxPlayers
         self.timeOfNextPlayer = timeOfNextPlayer
+        self.visibility = visibility 
 
     @staticmethod
-    def AcessConfig(minPlayers, maxPlayers):
-        if minPlayers < 4:
-            raise RuntimeError("'min players' can't be less than 4");
-        
-        if minPlayers > 13:
-            raise RuntimeError("'min players' can't be less than 4");
-        
-        if maxPlayers > 13:
-            raise RuntimeError("'min players' can't be less than 4");
-        
-        if maxPlayers < minPlayers:
-            raise RuntimeError("'min players' can't be less than 4");
-        
-        return AcessConfig(minPlayers, maxPlayers, 15)
+    def ofPublic(self, maxPlayers):
+        return self.of(
+            maxPlayers,
+            Visibility.PUBLIC
+        )
     
-    def minPlayers(self):
-        return self.minPlayers
+    @staticmethod
+    def ofPrivate(self, maxPlayers):
+        return self.of(
+            maxPlayers,
+            Visibility.PRIVATE
+        )
     
-    def maxPlayers(self):
+    @staticmethod
+    def of(maxPlayers, visibility: Visibility):
+        if(maxPlayers < AcessConfig.MIN_PLAYERS):
+            print("Erro: 'max players' can´t be less than four")
+        
+        if(maxPlayers > 13):
+            print("Erro: 'max players' can´t be greater than 13")
+        
+        return AcessConfig(maxPlayers, 15, visibility)
+
+    def getMinPlayers():
+        return AcessConfig.MIN_PLAYERS
+    
+    def getMaxPlayers(self):
         return self.maxPlayers
     
-    def timeOfNextPlayer(self):
+    def getTimeOfNextPlayer(self):
         return self.timeOfNextPlayer
+
+    def getVisibility(self):
+        return self.visibility
+    
+    class Visibility(Enum):
+        PUBLIC = 0
+        PRIVATE = 1
+

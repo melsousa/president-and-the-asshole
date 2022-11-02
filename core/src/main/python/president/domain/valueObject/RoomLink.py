@@ -8,7 +8,7 @@ class RoomLink(ValueObject):
         self.value = value
     
     @staticmethod
-    def RoomLink():
+    def ofRoomLink():
         return RoomLink(uuid.uuid4())
     
     def value(self):

@@ -23,3 +23,5 @@ class CardValue(ValueObject, Enum):
     
     def value(self):
         return self.value
+    
+    # def compare(self, ):

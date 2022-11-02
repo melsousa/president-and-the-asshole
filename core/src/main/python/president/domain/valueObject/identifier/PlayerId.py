@@ -11,5 +11,6 @@ class PlayerId(BaseId):
     def ofPlayerId():
         return PlayerId(uuid.uuid4())  # retornar um novo id
 
+    @staticmethod
     def of(value: uuid):  # retornar um id já existente
         return PlayerId(value)

@@ -9,4 +9,3 @@ class Suit(ValueObject, Enum):
     DIAMONDS = 1
     CLUBS = 1
     SPADES = 1
-    

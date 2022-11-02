@@ -19,7 +19,7 @@ class BaseId(ValueObject, ABC):
     def __eq__(self, o):
         if self.value == o:
             return True
-        if o == NULL or self.__class__.__name__ != o.__class__.__name__: 
+        if o == NULL or self.__class__.__name__ != o.__class__.__name__:  
             return False
         baseId = BaseId(o)
         return self.value.__eq__(baseId.value)
