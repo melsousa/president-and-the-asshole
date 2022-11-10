@@ -1,17 +1,12 @@
-from hmac import new
-import uuid
 from BaseId import BaseId
-
+import uuid
 
 class CardId(BaseId):
-    def __init__(self, value: uuid):
+    def __init__(self, value: uuid.UUID):
         super().__init__(value)
 
-
-    @staticmethod
-    def ofCardId():  # retornar um novo id
-        return CardId(uuid.uuid4())
-
-    @staticmethod
-    def of(value: uuid):  # retornar um id já existente
+    def ofCardId():
+        return CardId(uuid.uuid4)
+    
+    def of(value: uuid.UUID):
         return CardId(value)
