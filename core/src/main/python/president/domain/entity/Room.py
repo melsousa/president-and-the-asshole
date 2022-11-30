@@ -2,7 +2,6 @@ from typing import List
 from enum import Enum
 
 from numpy import place
-from core.src.main.python.president.domain.entity.Player import Player
 
 from valueObject.AcessConfig import AcessConfig
 from valueObject.CardValue import CardValue
@@ -11,7 +10,7 @@ from valueObject.Suit import Suit
 from valueObject.identifier.PlayerId import PlayerId
 from valueObject.identifier.RoomId import RoomId
 from valueObject.RoomLink import RoomLink
-
+from valueObject.deck import Deck
 from Card import Card
 from Player import Player
 from Status import Status
@@ -19,12 +18,15 @@ from Status import Status
 
 class Room(Enum):
 
+    N_DECKS = 2
     roomId: RoomId
     owner: Player
     roomLink: RoomLink
     acessConfig: AcessConfig
     players: List[Player] = []
     playersToChoice: List[PlayerId] = []
+    cardsToChoice: List[Card] = []
+
     cardsToChoice: List[Card] = []
     status: Status
 
@@ -34,14 +36,29 @@ class Room(Enum):
         self.roomLink = roomLink
         self.acessConfig = acessConfig
         self.players = players
-        self.cardsToChoice = [] # +
+        self.cardsToChoice = []
+        self.cardsToDeal = []
+
         self.status = Status.WAITING
+
+    def dealCards(self):
+        pass
+        # qtyCardsOfRemove = (self.N_DECKS * 52) % self.players.__len__()
+        # card = 0
+        # for i in range(0, self.N_DECKS, 1):
+        #     for j in range(card:Deck.Deckof()._Card()):
+        #         if card.CardValue()
 
     def toSorting(self):
         if self.status != Status.WAITING:
-            print("Room is not waiting") # +
-            
-            
+            print("Room is not waiting")  # +
+
+    def shuffleCardsToChoice(self):
+        if self.players.__len__() < self.acessConfig.minplayers():
+            raise RuntimeError("'max players' can't be less than four!")
+        
+        # for 
+        
     @staticmethod
     def ofRoom(ownerId: PlayerId, acessConfig: AcessConfig):
         roomId = RoomId.ofRoomId()
@@ -51,6 +68,10 @@ class Room(Enum):
 
         return Room(roomId, ownerId, roomLink, acessConfig, players)
 
+    def choiceCard(self,player:Player):
+        if self.status != Status.IN_SORTING:
+            pass
+        
     def addPlayer(self, playerId: PlayerId):
         pass
         # if self.players.len() >= self.acessConfig.maxPlayers():
@@ -70,5 +91,5 @@ class Room(Enum):
     def acessConfig(self):
         return self.acessConfig
 
-    def players(self):  # ?
+    def players(self):
         return self.players
