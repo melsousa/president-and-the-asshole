@@ -40,7 +40,7 @@ class Room(Enum):
         self.cardsToDeal = []
 
         self.status = Status.WAITING
-
+    
     def dealCards(self):
         pass
         # qtyCardsOfRemove = (self.N_DECKS * 52) % self.players.__len__()
@@ -48,17 +48,17 @@ class Room(Enum):
         # for i in range(0, self.N_DECKS, 1):
         #     for j in range(card:Deck.Deckof()._Card()):
         #         if card.CardValue()
-
+    
     def toSorting(self):
         if self.status != Status.WAITING:
-            print("Room is not waiting")  # +
-
+            print("Room is not waiting") # +
+    
     def shuffleCardsToChoice(self):
         if self.players.__len__() < self.acessConfig.minplayers():
             raise RuntimeError("'max players' can't be less than four!")
         
-        # for 
-        
+        # for         
+           
     @staticmethod
     def ofRoom(ownerId: PlayerId, acessConfig: AcessConfig):
         roomId = RoomId.ofRoomId()
