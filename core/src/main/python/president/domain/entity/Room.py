@@ -1,7 +1,7 @@
 from typing import List
 from enum import Enum
 
-from numpy import place
+#from numpy import place
 
 from valueObject.AcessConfig import AcessConfig
 from valueObject.CardValue import CardValue
