@@ -6,6 +6,7 @@ from valueObject.identifier.CardId import CardId
 from Card import Card
 
 class Card:
+    
     cardId:CardId
     cardValue:CardValue
     suit:Suit
@@ -34,8 +35,6 @@ class Card:
     def compareTo(self, o:Card):
         return o.getCardValue().value() - self.getCardValue().value
     
-    def __eq__(self, c:Card):
-        return self.c == c
 
         
 

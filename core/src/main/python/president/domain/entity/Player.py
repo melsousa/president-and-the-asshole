@@ -6,11 +6,12 @@ from valueObject.CardValue import CardValue
 from Card import Card
 from Player import Player
 
+
 class Player:
 
     playerId: PlayerId
     cards: List[Card] = []
-    choiceCard:Card
+    choiceCard: Card
 
     def __init__(self, playerId: PlayerId, nickName, cards: List[Card], choiceCard: Card):
         self.playerId = playerId
@@ -21,10 +22,10 @@ class Player:
     def ofPlayer(self, nickName):
         return Player(PlayerId.of(), nickName, [], NULL)  # ?
 
-    def SetchoiceCard(self, card:Card):
+    def choiceCard(self, card: Card):
         self.choiceCard = card
 
-    def addCard(self,card:Card):
+    def addCard(self, card: Card):
         self.cards.append(card)
 
     def playerId(self):
@@ -34,10 +35,10 @@ class Player:
         return self.nickName
 
     def cards(self):
-        return self.cards  # ?
+        return self.cards  # ++
 
     def choiceCard(self):
         return self.choiceCard
 
-    def __eq__(self, player:Player):
+    def __eq__(self, player: Player):
         return self.choiceCard.__eq__(player.choiceCard)
