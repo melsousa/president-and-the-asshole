@@ -1,6 +1,7 @@
 from enum import Enum
 from tarfile import FIFOTYPE
 from ValueObject import ValueObject
+from CardValue import CardValue
 
 class CardValue(ValueObject, Enum):
     
@@ -24,5 +25,6 @@ class CardValue(ValueObject, Enum):
     def value(self):
         return self.value
     
-    # def compare(self, ):
+    def compare(self, c:CardValue):
+        return self.value() - c.value()
         

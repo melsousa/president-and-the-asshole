@@ -5,6 +5,7 @@ from Visibility import Visibility
 class AcessConfig(ValueObject, Visibility):
 
     MIN_PLAYERS = 4
+    visibility:Visibility
 
     def __init__(self,  maxPlayers, timeOfNextPlayer, visibility: Visibility):
 
@@ -14,7 +15,7 @@ class AcessConfig(ValueObject, Visibility):
 
     @staticmethod
     def ofPublicAcessConfig(maxplayers):
-        return AcessConfig(maxplayers, Visibility.PUBLIC)  # ?
+        return AcessConfig(maxplayers, Visibility.PUBLIC)  
     
     @staticmethod
     def ofPrivateAcessConfig(maxplayers):
