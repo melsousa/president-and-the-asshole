@@ -1,7 +1,7 @@
 from typing import List
 from enum import Enum
+import random
 
-#from numpy import place
 
 from valueObject.AcessConfig import AcessConfig
 from valueObject.CardValue import CardValue
@@ -27,17 +27,18 @@ class Room(Enum):
     playersToChoice: List[PlayerId] = []
     cardsToChoice: List[Card] = []
 
-    cardsToDeal: List[Card] = []
+    cardsToDeal: tuple(Card) = ()
     status: Status
 
     def __init__(self, roomId: RoomId, owner: Player, roomLink: RoomLink, acessConfig: AcessConfig, players: List[Player]):
+
         self.roomId = roomId
         self.owner = owner
         self.roomLink = roomLink
         self.acessConfig = acessConfig
         self.players = players
         self.cardsToChoice = []
-        self.cardsToDeal = []
+        self.cardsToDeal = ()
 
         self.initializePlayers(players)
 
@@ -54,7 +55,10 @@ class Room(Enum):
                     qtyCardsOfRemove -= 1
 
                 self.cardsToDeal.append(card)
-                # ++
+
+        listCardsToDeal = list(self.cardsToDeal)
+        random.shuffle(listCardsToDeal)
+        self.cardsToDeal = tuple(listCardsToDeal)
 
         currentPlayer = 0
 
@@ -63,10 +67,12 @@ class Room(Enum):
             currentPlayer = (currentPlayer + 1) % self.players.__len__()
 
     def initializePlayers(self, players: Player[List]):
+
         self.playersToChoice = [players.index(
             players.playerId(), 0, players.__len__())]  # ?
 
     def toSorting(self):
+
         if self.status != Status.WAITING:
             raise ValueError("Room is not waiting")
 
@@ -74,16 +80,18 @@ class Room(Enum):
         self.status = Status.IN_SORTING
 
     def shuffleCardsToChoice(self):
+
         if self.players.__len__() < self.acessConfig.minplayers():
             raise RuntimeError("'min players' can't be less than four!")
 
         for cardValue in CardValue.value():
             self.cardsToChoice.append(Card.ofCard(cardValue, Suit.CLUBS))
 
-        # ++
+        self.cardsToChoice = random.shuffle(self.cardsToChoice)
 
     @staticmethod
     def ofRoom(owner: Player, acessConfig: AcessConfig):
+
         roomId = RoomId.ofRoomId()
         roomLink = RoomLink.ofRoomLink()
         players: List[Player] = []
@@ -91,14 +99,16 @@ class Room(Enum):
 
         return Room(roomId, owner, roomLink, acessConfig, players)
 
-    def choiceCar(self, player: Player):
+    def choiceCard(self, player: Player):
+
         if self.status != Status.IN_SORTING:
             raise ValueError("Room is not in sorting")
 
-        if (not (self.playerToChoice.__contains__(player.playerId()))):  # ++
-            raise ValueError("Can't choice card for player " + player.playerId().value())
+        if (not (self.playerToChoice.__contains__(player.playerId()))):
+            raise ValueError("Can't choice card for player " +
+                             player.playerId().value())
 
-        card = self.cardsToChoice.get(0)  
+        card = self.cardsToChoice.get(0)
         player.choiceCard(card)
         self.cardsToChoice.remove(card)
         self.playersToChoice.remove(player.playerId())
@@ -106,24 +116,24 @@ class Room(Enum):
         return card
 
     def sortPlayers(self):
+
         if len(self.playersToChoice) == 0:
-            self.players.sort(Player)  # faltando códogp
+            self.players.sort(lambda Player: self.compareTo)
             self.toThrowing()
 
     def toThrowing(self):
         if self.status != Status.IN_SORTING and self.status != Status.ROUND_FINISHED:
             raise ValueError("Room is not in sorting or round finished")
-        
+
         self.status = Status.THROWING_CARDS
-    
+
     def toInGame(self):
         if self.status != Status.THROWING_CARDS:
             raise ValueError("Room is not throwing cards")
-        
-        self.status = Status.IN_GAME
-        
 
-    def addPlayer(self, player:Player):
+        self.status = Status.IN_GAME
+
+    def addPlayer(self, player: Player):
         if self.players.__len__() >= self.acessConfig.maxPlayers():
             raise RuntimeError("This room is full!")
 
@@ -146,5 +156,4 @@ class Room(Enum):
         return self.players
 
     def cardsToDeal(self):
-        # return
-        pass
+        return tuple(self.cardsToDeal)

@@ -33,7 +33,7 @@ class Card:
         return self.cardValue + " of "+ self.suit
     
     def compareTo(self, o:Card):
-        return o.getCardValue().value() - self.getCardValue().value
+        return o.getCardValue().value() - self.getCardValue().value()
     
 
         
