@@ -1,34 +1,25 @@
-import card as Card
+from typing import List
 
-class Deck:
+from entity.Card import Card
+from CardValue import CardValue
+from Suit import Suit
+from ValueObject import ValueObject
+
+class Deck(ValueObject):
     
-    def _Card(self,Card):
-        self._Card = Card[]
+    card: List[Card] = []
+   
+    def __init__(self) :
+        self._deck = Card[52]
         
+        for i in range(0, 52, 1):
+            self._deck[i] = Card.ofCard(CardValue.value()[i % 13], Suit.value()[i / 13])
+    
     @property
     def _Card(self):
         return self._Card
+   
+    def Deckof(self):
+        return Deck()
     
-    @_Card.setter
-    def Card(self, _cards):
-        self._Card = _cards
-        
-    def _deck(self) :
-        self._deck = Card[52]
-        
-        for i in range(0, 13):
-            self._deck[i] = Card(i, "Spades")
-        for i in range(13, 26):
-            self._deck[i] = Card(i, "Hearts")
-        for i in range(26, 39):
-            self._deck[i] = Card(i, "Clubs")
-        for i in range(39, 52):
-            self._deck[i] = Card(i, "Diamonds")
-            
-    @property
-    def _deck(self):
-        return self._deck
     
-    @_deck.setter
-    def deck(self, _deck):
-        self._deck = _deck

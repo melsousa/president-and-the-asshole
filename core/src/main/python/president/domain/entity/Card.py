@@ -1,9 +1,12 @@
+from functools import cmp_to_key
+
 from valueObject.CardValue import CardValue
 from valueObject.Suit import Suit
 from valueObject.identifier.CardId import CardId
 from Card import Card
 
 class Card:
+    
     cardId:CardId
     cardValue:CardValue
     suit:Suit
@@ -31,3 +34,7 @@ class Card:
     
     def compareTo(self, o:Card):
         return o.getCardValue().value() - self.getCardValue().value
+    
+
+        
+

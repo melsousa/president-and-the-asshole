@@ -13,3 +13,6 @@ class RoomId(BaseId):
     @staticmethod
     def of(value: uuid):  # retornar um id já existente
         return RoomId(value)
+    
+    def ofStringRoomId(self, value):
+        return RoomId(uuid.uuid4.__str__(value))

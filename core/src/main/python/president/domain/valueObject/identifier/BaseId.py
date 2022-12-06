@@ -23,3 +23,6 @@ class BaseId(ValueObject, ABC):
             return False
         baseId = BaseId(o)
         return self.value.__eq__(baseId.value)
+
+    def hashCode(self):
+        return hash(self.value)

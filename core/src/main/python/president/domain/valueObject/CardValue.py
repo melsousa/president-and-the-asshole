@@ -22,8 +22,9 @@ class CardValue(ValueObject, Enum):
     def __init__(self, value):
         self.value = value
     
-    def getValue(self):
+    def value(self):
         return self.value
     
-    def compare(self, c: CardValue):
-        return self.getValue() - c.getValue()
+    def compare(self, c:CardValue):
+        return self.value() - c.value()
+        
