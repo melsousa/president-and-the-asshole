@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-#importar RoomID
+from ............core.src.main.python.president.domain.valueObject.identifier.RoomId import RoomId
 
 class RetrieveRoomByIdUseCase(ABC):
 

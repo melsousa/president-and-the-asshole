@@ -2,6 +2,8 @@ from main import app
 from flask import request
 from .........application.src.main.python.president.application.usecase.room.create.CreateRoomUseCaseImpl import CreateRoomUseCaseImpl
 from ..repository.RoomInMemoryRepository import RoomInMemoryRepository
+from .........application.src.main.python.president.application.usecase.room.retrieve.by.id.RetrieveRoomByIdUseCaseImpl import RetrieveRoomByIdUseCaseImpl
+from .........core.src.main.python.president.domain.valueObject.identifier.RoomId import RoomId
 
 class RoomController:
 
@@ -15,4 +17,6 @@ class RoomController:
     
     @app.route("rooms/<uuid:roomId>", methods = ['GET'])
     def retrieveRoomById(roomId):
-        useCase = 
+        useCase = RetrieveRoomByIdUseCaseImpl(RoomInMemoryRepository())
+
+        return useCase.execute(RoomId.of(roomId))

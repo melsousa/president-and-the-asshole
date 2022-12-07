@@ -1,5 +1,6 @@
 from ............core.src.main.python.president.domain.valueObject.AcessConfig import AcessConfig
 from ............core.src.main.python.president.domain.entity.Room import Room
+
 class RetrieveRoomByIdOut():
     def __init__(self, link, status, visibility:AcessConfig.visibility):
         self.link = link
