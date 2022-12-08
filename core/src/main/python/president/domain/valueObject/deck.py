@@ -7,13 +7,16 @@ from ValueObject import ValueObject
 
 class Deck(ValueObject):
     
-    card: List[Card] = []
+    _deck: List[Card] = []
    
     def __init__(self) :
+        
+        
         self._deck = Card[52]
         
         for i in range(0, 52, 1):
-            self._deck[i] = Card.ofCard(CardValue.value()[i % 13], Suit.value()[i / 13])
+                
+                self._deck[i] = Card.ofCard(CardValue.value()[i % 13], Suit.value()[i / 13])
     
     @property
     def _Card(self):

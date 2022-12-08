@@ -10,10 +10,10 @@ from Player import Player
 class Player:
 
     playerId: PlayerId
-    cards: List[Card] = []
+    cards: tuple(Card) = ()
     choiceCard: Card
 
-    def __init__(self, playerId: PlayerId, nickName, cards: List[Card], choiceCard: Card):
+    def __init__(self, playerId: PlayerId, nickName, cards: tuple(Card), choiceCard: Card):
         self.playerId = playerId
         self.nickName = nickName
         self.cards = cards
@@ -35,7 +35,7 @@ class Player:
         return self.nickName
 
     def cards(self):
-        return self.cards  # ++
+        return tuple(self.cards)  
 
     def choiceCard(self):
         return self.choiceCard

@@ -8,6 +8,7 @@ class CreateRoomUseCaseImpl(CreateRoomUseCase):
     repository:RoomRepository
 
     def __init__(self, repository:RoomRepository):
+        super().__init__()
         self.repository = repository
     
     def execute(self, anIn: CreateRoomIn):
