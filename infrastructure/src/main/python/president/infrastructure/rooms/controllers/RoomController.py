@@ -1,4 +1,4 @@
-from main import app
+from president.main import app
 from flask import request
 from .........application.src.main.python.president.application.usecase.room.create.CreateRoomUseCaseImpl import CreateRoomUseCaseImpl
 from ..repository.RoomInMemoryRepository import RoomInMemoryRepository
