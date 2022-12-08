@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./application/src/main/python/president/application/usecase/room"
+    ]
+}
